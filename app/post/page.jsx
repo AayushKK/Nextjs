@@ -12,18 +12,14 @@ export const metadata = () => {
   }
 }
 
-export const revalidate = 1;
+// export const revalidate = 1;
 export default async function Page() {
 
   return (
     <div className='p-5 space-y-5'>
       <div className='flex justify-between'>
         <h1>Post Pages</h1>
-        <Link href={"/post/add-post"}>
-          <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer'>
-            Add Post
-          </button>
-        </Link>
+        <Link href={"/post/add-post"}><button className='cursor-pointer bg-black text-white px-4 py-1 rounded-lg'>Add Post</button></Link>
       </div>
 
       <p>Here are the list of posts</p>

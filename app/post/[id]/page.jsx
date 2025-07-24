@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 export const generateMetadata = async ({ params }) => {
   const { id } = await params;
   return {
@@ -11,11 +12,11 @@ export const generateMetadata = async ({ params }) => {
 export default async function Page({ params }) {
 
   const { id } = await params;
-  console.log(id);
+
   return (
     <div>
 
-      <h1>This is  Post no  </h1>
+      <h1>This is Single Post Page</h1>
 
     </div>
   )
