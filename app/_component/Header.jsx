@@ -8,7 +8,9 @@ export default function Header() {
       </h1>
       <nav className="space-x-4">
         <Link href={"/post"}>Posts</Link>
-        <Link href={"/meal"}>Meals</Link>
+        <Link href={"/about"}>About</Link>
+        <Link href={"/contact"}>Contact</Link>
+
       </nav>
     </div>
   )
