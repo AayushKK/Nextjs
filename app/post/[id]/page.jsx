@@ -1,14 +1,16 @@
-import Image from "next/image";
-import axios from "axios";
 
+import Image from "next/image";
+
+import { getPost } from "../../_lib/serverAction";
+import DeleteButton from "./Deletebutton";
 export default async function Page({ params }) {
   const { id } = params;
   let post = null;
 
+
   try {
-    const res = await axios.get(`https://67d37e878bca322cc26a36c9.mockapi.io/posts?id=${id}`);
-    const allPosts = res.data;
-    post = allPosts[0];
+    const response = await getPost(id);
+    post = response[0];
 
     if (!post) {
       throw new Error("Post not found");
@@ -42,6 +44,7 @@ export default async function Page({ params }) {
         <span>Post ID: {post.id}</span>
         <span>{new Date().toLocaleDateString()}</span>
       </div>
+      <DeleteButton postId={id} />
     </div>
   );
 }

@@ -24,7 +24,7 @@ export default async function PostList() {
           </div>
           <div className="p-4">
             <h2 className="text-lg font-bold mb-2">{post.title}</h2>
-            <p className="text-gray-700 text-sm sm:text-base mb-2">{post.detail}</p>
+            <p className="text-gray-700 text-sm sm:text-base mb-2 line-clamp-3">{post.detail}</p>
             <span className="text-gray-400 text-xs">Post ID: {post.id}</span>
           </div>
         </Link>

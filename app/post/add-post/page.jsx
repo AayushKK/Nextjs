@@ -1,78 +1,98 @@
 'use client';
 
 import { Formik } from 'formik';
-import React, { useTransition } from 'react'
+
+import React, { useTransition } from 'react';
 import { postData } from '../../_lib/serverAction';
+import Button from '../../_component/Button';
+import * as Yup from "yup";
+
+const validationSchema = Yup.object({
+  title: Yup.string().required("Title is required"),
+  detail: Yup.string().required("Detail is required"),
+  image: Yup.string()
+    .url("Must be a valid URL")
+    .required("Image URL is required"),
+});
+export default function AddPostForm() {
+  const [isPending, startTransition] = useTransition();
+
+  const initialValues = {
+    title: '',
+    detail: '',
+    image: '',
+  };
 
 
-export default function Page() {
-
-  const [isPending, setTransition] = useTransition();
 
   return (
-
-
-    <div className='p-4 '>
-
+    <div className="max-w-xl mx-auto p-6 bg-white rounded-xl shadow-md mt-10">
+      <h1 className="text-2xl font-bold mb-6">Add New Post</h1>
 
       <Formik
-        initialValues={{
-          title: '',
-          detail: '',
-          image: '',
-        }}
-        onSubmit={(val) => {
-          setTransition(async () => {
-            const { error } = await postData(val);
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={(values, { resetForm }) => {
+          startTransition(async () => {
+            const { error } = await postData(values);
             if (error) {
-              alert('something went wrong')
+              alert('Something went wrong');
+            } else {
+              alert('Post added successfully!');
+              resetForm();
             }
           });
-
         }}
       >
-        {({ values, handleChange, handleSubmit }) => (
-          <form onSubmit={handleSubmit} className='space-y-4'>
+        {({ values, handleChange, handleSubmit, errors, touched }) => (
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <input
-                className='border'
-                placeholder='Title'
-                name='title'
-                onChange={handleChange}
+                type="text"
+                name="title"
+                placeholder="Title"
                 value={values.title}
-                type="text" />
-
+                onChange={handleChange}
+                className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+              />
+              {errors.title && touched.title && (
+                <p className="text-red-500 text-sm mt-1">{errors.title}</p>
+              )}
             </div>
 
             <div>
-              <input
-                className='border'
-                placeholder='Detail'
-                name='detail'
-                onChange={handleChange}
+              <textarea
+                name="detail"
+                placeholder="Detail"
                 value={values.detail}
-                type="text" />
+                onChange={handleChange}
+                className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+              />
+              {errors.detail && touched.detail && (
+                <p className="text-red-500 text-sm mt-1">{errors.detail}</p>
+              )}
             </div>
-
 
             <div>
               <input
-                className='border'
-                placeholder='Image Url'
-                name='image'
-                onChange={handleChange}
+                type="text"
+                name="image"
+                placeholder="Image URL"
                 value={values.image}
-                type="text" />
+                onChange={handleChange}
+                className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+              />
+              {errors.image && touched.image && (
+                <p className="text-red-500 text-sm mt-1">{errors.image}</p>
+              )}
             </div>
 
-
-            {isPending ? <div>Loading...</div> : <button type='submit' className='cursor-pointer bg-black text-white px-4 py-1 rounded-lg'>Submit</button>}
-
-
+            <Button type="submit" loading={isPending}>
+              Submit
+            </Button>
           </form>
         )}
       </Formik>
-
     </div>
-  )
+  );
 }
