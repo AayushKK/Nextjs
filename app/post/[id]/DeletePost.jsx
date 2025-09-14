@@ -4,7 +4,7 @@ import { deletePost } from "../../_lib/serverAction";
 import Button from "../../_component/Button";
 
 
-export default function DeleteButton({ postId }) {
+export default function DeletePost({ postId }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
 

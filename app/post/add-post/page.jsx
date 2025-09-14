@@ -5,17 +5,10 @@ import { Formik } from 'formik';
 import React, { useTransition } from 'react';
 import { postData } from '../../_lib/serverAction';
 import Button from '../../_component/Button';
-import * as Yup from "yup";
-
-const validationSchema = Yup.object({
-  title: Yup.string().required("Title is required"),
-  detail: Yup.string().required("Detail is required"),
-  image: Yup.string()
-    .url("Must be a valid URL")
-    .required("Image URL is required"),
-});
+import { validationSchema } from '../../_utils/validationschema';
 export default function AddPostForm() {
   const [isPending, startTransition] = useTransition();
+
 
   const initialValues = {
     title: '',

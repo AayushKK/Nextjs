@@ -40,3 +40,13 @@ export async function getPost(id) {
     return []; // return empty array on error
   }
 }
+
+export async function updatePost(id, val) {
+  try {
+    await axios.put(`https://67d37e878bca322cc26a36c9.mockapi.io/posts/${id}`, val);
+  } catch (err) {
+    return { error: 'Something went wrong' };
+  }
+  revalidatePath('/post');
+  redirect('/post');
+}

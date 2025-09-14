@@ -2,9 +2,12 @@
 import Image from "next/image";
 
 import { getPost } from "../../_lib/serverAction";
-import DeleteButton from "./Deletebutton";
+import EditPost from "./EditPost";
+import DeletePost from "./DeletePost";
+
+
 export default async function Page({ params }) {
-  const { id } = params;
+  const { id } = await params;
   let post = null;
 
 
@@ -42,9 +45,12 @@ export default async function Page({ params }) {
 
       <div className="mt-6 flex justify-between text-gray-500 text-sm">
         <span>Post ID: {post.id}</span>
-        <span>{new Date().toLocaleDateString()}</span>
+
       </div>
-      <DeleteButton postId={id} />
+      <div className="mt-6 flex space-x-4">
+        <DeletePost postId={id} />
+        <EditPost postId={id} postdetails={post} />
+      </div>
     </div>
   );
 }
