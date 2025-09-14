@@ -1,13 +1,12 @@
-import React from 'react'
+import { getPost } from '../../../_lib/serverAction';
+import EditForm from './Editform';
 
 
-const EditForm = async ({ params }) => {
+export default async function Page({ params }) {
   const { id } = await params;
-  return (
-    <div>
-      this is EditForm of {`${id}`}
+  const data = await getPost(id);
 
-    </div>
-  )
-}
-export default EditForm
+  return <EditForm id={id} data={data[0]} />;
+};
+
+

@@ -11,3 +11,4 @@ const EditPost = ({ postId }) => {
   )
 }
 export default EditPost
+

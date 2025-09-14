@@ -1,3 +1,4 @@
+import Link from "next/link"
 import React from "react"
 
 export default function Page() {
@@ -13,18 +14,23 @@ export default function Page() {
       </div>
       <div className="max-w-5xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
 
-        <div className="bg-white p-6 rounded-xl shadow-lg hover:scale-105 transform transition">
+        <Link href={"/post/add-post"}><div className="bg-white p-6 rounded-xl shadow-lg hover:scale-105 transform transition">
           <h2 className="text-xl font-bold mb-2">Add Post</h2>
           <p>Create new posts with ease and share your thoughts.</p>
         </div>
-        <div className="bg-white p-6 rounded-xl shadow-lg hover:scale-105 transform transition">
-          <h2 className="text-xl font-bold mb-2">Edit Post</h2>
-          <p>Modify existing posts whenever you need.</p>
-        </div>
-        <div className="bg-white p-6 rounded-xl shadow-lg hover:scale-105 transform transition">
-          <h2 className="text-xl font-bold mb-2">Delete Post</h2>
-          <p>Remove posts quickly and safely with confirmation.</p>
-        </div>
+        </Link>
+        <Link href="/post">
+          <div className="bg-white p-6 rounded-xl shadow-lg hover:scale-105 transform transition">
+            <h2 className="text-xl font-bold mb-2">Edit Post</h2>
+            <p>Modify existing posts whenever you need.</p>
+          </div>
+        </Link>
+        <Link href="/post">
+          <div className="bg-white p-6 rounded-xl shadow-lg hover:scale-105 transform transition">
+            <h2 className="text-xl font-bold mb-2">Delete Post</h2>
+            <p>Remove posts quickly and safely with confirmation.</p>
+          </div>
+        </Link>
       </div>
     </div>
   )
